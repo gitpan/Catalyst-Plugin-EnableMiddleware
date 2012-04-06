@@ -1,9 +1,9 @@
 
 
 This archive contains the distribution Catalyst-Plugin-EnableMiddleware,
-version 0.003:
+version 0.004:
 
-  Mount any Plack application to a URL root
+  Enable Plack Middleware via Configuration
 
 This software is copyright (c) 2012 by John Napiorkowski.
 

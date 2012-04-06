@@ -9,7 +9,7 @@ use ExtUtils::MakeMaker 6.30;
 
 
 my %WriteMakefileArgs = (
-  "ABSTRACT" => "Mount any Plack application to a URL root",
+  "ABSTRACT" => "Enable Plack Middleware via Configuration",
   "AUTHOR" => "John Napiorkowski <jjnapiork\@cpan.org>",
   "BUILD_REQUIRES" => {
     "Catalyst" => 0,
@@ -33,7 +33,7 @@ my %WriteMakefileArgs = (
     "Scalar::Util" => 0,
     "namespace::autoclean" => 0
   },
-  "VERSION" => "0.003",
+  "VERSION" => "0.004",
   "test" => {
     "TESTS" => "t/*.t"
   }

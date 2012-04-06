@@ -1,5 +1,5 @@
 ---
-abstract: 'Mount any Plack application to a URL root'
+abstract: 'Enable Plack Middleware via Configuration'
 author:
   - 'John Napiorkowski <jjnapiork@cpan.org>'
 build_requires:
@@ -24,4 +24,4 @@ requires:
   Plack::Util: 0
   Scalar::Util: 0
   namespace::autoclean: 0
-version: 0.003
+version: 0.004
