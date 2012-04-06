@@ -28,12 +28,14 @@ my %WriteMakefileArgs = (
   "LICENSE" => "perl",
   "NAME" => "Catalyst::Plugin::EnableMiddleware",
   "PREREQ_PM" => {
+    "Catalyst::Utils" => 0,
     "Moose::Role" => 0,
     "Plack::Util" => 0,
     "Scalar::Util" => 0,
+    "Text::SimpleTable" => 0,
     "namespace::autoclean" => 0
   },
-  "VERSION" => "0.004",
+  "VERSION" => "0.005",
   "test" => {
     "TESTS" => "t/*.t"
   }

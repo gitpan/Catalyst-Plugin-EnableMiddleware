@@ -20,8 +20,10 @@ meta-spec:
   version: 1.4
 name: Catalyst-Plugin-EnableMiddleware
 requires:
+  Catalyst::Utils: 0
   Moose::Role: 0
   Plack::Util: 0
   Scalar::Util: 0
+  Text::SimpleTable: 0
   namespace::autoclean: 0
-version: 0.004
+version: 0.005

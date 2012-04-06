@@ -1,7 +1,7 @@
 
 
 This archive contains the distribution Catalyst-Plugin-EnableMiddleware,
-version 0.004:
+version 0.005:
 
   Enable Plack Middleware via Configuration
 
