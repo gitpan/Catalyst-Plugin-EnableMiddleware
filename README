@@ -1,7 +1,7 @@
 
 
 This archive contains the distribution Catalyst-Plugin-EnableMiddleware,
-version 0.002:
+version 0.003:
 
   Mount any Plack application to a URL root
 
