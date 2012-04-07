@@ -7,7 +7,7 @@ use Scalar::Util;
 use Catalyst::Utils;
 use Text::SimpleTable;
 
-our $VERSION = '0.005';
+our $VERSION = '0.006';
 
 around 'psgi_app', sub {
   my ($orig, $self, @args) = @_;
@@ -19,7 +19,7 @@ around 'psgi_app', sub {
   my $column_width = Catalyst::Utils::term_width() - 6;
   my $t = Text::SimpleTable->new($column_width);
 
-  my @mw = @{$self->config->{'Plugin::EnableMiddleware'}||[]};
+  my @mw = reverse @{$self->config->{'Plugin::EnableMiddleware'}||[]};
   while(my $next = shift(@mw)) {
     if(Scalar::Util::blessed $next && $next->can('wrap')) {
       $t->row(ref $next);
@@ -28,6 +28,10 @@ around 'psgi_app', sub {
       if($type eq 'CODE') {
       $t->row('CodeRef');
         $psgi_app = $next->($psgi_app);
+      } elsif($type eq 'HASH') {
+        my $module = Plack::Util::load_class(shift @mw, 'Plack::Middleware');
+       $t->row($module);
+        $psgi_app = $module->wrap($psgi_app, %$next);
       }
     } else {
       my $normalized_next = Plack::Util::load_class($next, 'Plack::Middleware');
@@ -168,14 +172,14 @@ doesn't preclude the other.
 
 =head1 CONFIGURATION
 
-Configuration for this plugin should be a hashref under the top level key
+Configuration for this plugin should be a ArrayRef under the top level key
 C<Plugin::EnableMiddleware>, as in the following:
 
     __PACKAGE__->config(
       'Plugin::EnableMiddleware', \@middleware);
 
-Where C<@middleware> is one or more of the following, applied in the order
-listed:
+Where C<@middleware> is one or more of the following, applied in the REVERSE of
+the order listed (to make it function similarly to L<Plack::Builder>:
 
 =over4
 
@@ -239,6 +243,13 @@ to initialize the middleware object.
     ]);
 
 =cut
+
+=head1 VERSION NOTES
+
+Versions prior to C<0.006> applied middleware in the order lists.  This led to
+unexpected problems when porting over middleware from L<Plack::Builder> since
+that applies middleware in reverse order.  This change makes this plugin behave
+as you might expect.
 
 =head1 AUTHOR
 
